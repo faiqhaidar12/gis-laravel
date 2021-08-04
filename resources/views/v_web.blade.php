@@ -62,7 +62,13 @@
         L.control.layers(baseMaps, overlayer).addTo(map);
 
         @foreach ($kecamatan as $data)
-            L.geoJSON(<?= $data->geojson ?>).addTo(data{{ $data->id_kecamatan }});
+            L.geoJSON(<?= $data->geojson ?>,{
+            style : {
+            color : 'white',
+            fillColor: '{{ $data->warna }}',
+            fillOpacity : 1.0,
+            },
+            }).addTo(data{{ $data->id_kecamatan }});
         @endforeach
     </script>
 @endsection
