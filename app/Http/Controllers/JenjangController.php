@@ -17,7 +17,6 @@ class JenjangController extends Controller
     {
         $data = [
             'title' => 'Jenjang',
-
             'jenjang' => $this->JenjangModel->AllData(),
         ];
         return view('admin.jenjang.v_index', $data);
@@ -31,7 +30,7 @@ class JenjangController extends Controller
         ];
         return view('admin.jenjang.v_add', $data);
     }
-
+    //untuk menambah data atau add data
     public function insert()
     {
         Request()->validate([
@@ -52,5 +51,39 @@ class JenjangController extends Controller
         ];
         $this->JenjangModel->InsertData($data);
         return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Simpan!!');
+    }
+    //untuk detail edit data
+    public function edit($id_jenjang)
+    {
+        $data = [
+            'title' => 'Edit Data Jenjang',
+            'jenjang' => $this->JenjangModel->DetailData($id_jenjang),
+
+        ];
+        return view('admin.jenjang.v_edit', $data);
+    }
+    ///untuk merubah atau edit data
+    public function update($id_jenjang)
+    {
+        request()->validate(
+            [
+                'jenjang' => 'required',
+            ],
+            [
+                'jenjang.required' => 'Wajib diisi !!',
+            ]
+        );
+        $data = [
+            'jenjang' => Request()->jenjang,
+        ];
+        $this->JenjangModel->UpdateData($id_jenjang, $data);
+        return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Update');
+    }
+
+    //untuk hapus atau delete
+    public function delete($id_jenjang)
+    {
+        $this->JenjangModel->DeleteData($id_jenjang);
+        return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Delete');
     }
 }

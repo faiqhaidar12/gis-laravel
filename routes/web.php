@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JenjangController;
+use App\Http\Controllers\SekolahController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +36,9 @@ Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'del
 Route::get('/jenjang', [JenjangController::class, 'index'])->name('jenjang');
 Route::get('/jenjang/add', [JenjangController::class, 'add']);
 Route::post('/jenjang/insert', [JenjangController::class, 'insert']);
+Route::get('/jenjang/edit/{id_jenjang}', [JenjangController::class, 'edit']);
+Route::post('/jenjang/update/{id_jenjang}', [JenjangController::class, 'update']);
+Route::get('/jenjang/delete/{id_jenjang}', [JenjangController::class, 'delete']);
+
+//Sekolah
+Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah');

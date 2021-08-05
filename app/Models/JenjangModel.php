@@ -20,4 +20,24 @@ class JenjangModel extends Model
         DB::table('tbl_jenjang')
             ->insert($data);
     }
+    //untuk menampilkan detaildata di form edit
+    public function DetailData($id_jenjang)
+    {
+        return DB::table('tbl_jenjang')
+            ->where('id_jenjang', $id_jenjang)->first();
+    }
+    //untuk edit data
+    public function UpdateData($id_jenjang, $data)
+    {
+        DB::table('tbl_jenjang')
+            ->where('id_jenjang', $id_jenjang)
+            ->update($data);
+    }
+    //untuk hapus atau delete data
+    public function DeleteData($id_jenjang)
+    {
+        DB::table('tbl_jenjang')
+            ->where('id_jenjang', $id_jenjang)
+            ->delete();
+    }
 }

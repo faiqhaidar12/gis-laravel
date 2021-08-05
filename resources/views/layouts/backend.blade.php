@@ -151,7 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="/sekolah" class="nav-link {{ request()->is('sekolah') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-school"></i>
                                 <p>
                                     Sekolah
@@ -160,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
 
                         <li class="nav-item">
-                            <a href="/jenjang" class="nav-link">
+                            <a href="/jenjang" class="nav-link {{ request()->is('jenjang') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-graduation-cap"></i>
                                 <p>
                                     Jenjang

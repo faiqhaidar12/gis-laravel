@@ -27,7 +27,7 @@
                         <tr>
                             <th width="60px">No</th>
                             <th>Kecamatan</th>
-                            <th width="50ox">Warna</th>
+                            <th width="50px">Warna</th>
                             <th width="100px" class="text-center">Action</th>
                         </tr>
                     </thead>

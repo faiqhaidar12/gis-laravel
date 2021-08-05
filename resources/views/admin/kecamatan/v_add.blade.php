@@ -10,16 +10,16 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/kecamatan/insert" method="POST">
+                <form action="/sekolah/insert" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Kecamatan</label>
-                                <input name="kecamatan" class="form-control" placeholder="Kecamatan">
+                                <label>Sekolah</label>
+                                <input name="sekolah" class="form-control" placeholder="sekolah">
                                 <div class="text-danger">
-                                    @error('kecamatan')
+                                    @error('sekolah')
                                         {{ $message }}
                                     @enderror
                                 </div>
