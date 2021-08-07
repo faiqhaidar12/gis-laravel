@@ -42,3 +42,5 @@ Route::get('/jenjang/delete/{id_jenjang}', [JenjangController::class, 'delete'])
 
 //Sekolah
 Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah');
+Route::get('/sekolah/add', [SekolahController::class, 'add']);
+Route::post('/sekolah/insert', [SekolahController::class, 'insert']);

@@ -10,16 +10,16 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/sekolah/insert" method="POST">
+                <form action="/kecamatan/insert" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>Sekolah</label>
-                                <input name="sekolah" class="form-control" placeholder="sekolah">
+                                <label>Kecamatan</label>
+                                <input name="kecamatan" class="form-control" placeholder="kecamatan">
                                 <div class="text-danger">
-                                    @error('sekolah')
+                                    @error('kecamatan')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary"><i class=" fa fa-save"></i> Simpan</button>
-                <button type="submit" class="btn btn-warning float-right"></i> Cancel</button>
+                <a href="/kecamatan" type="submit" class="btn btn-warning float-right"></i> Cancel</a>
             </div>
             </form>
         </div>

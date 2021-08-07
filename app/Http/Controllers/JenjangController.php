@@ -35,7 +35,7 @@ class JenjangController extends Controller
     {
         Request()->validate([
             'jenjang' => 'required',
-            'icon' => 'required|max:1024',
+
         ], [
             'jenjang.required' => 'Wajib Diisi !!',
             'icon.required' => 'Wajib Diisi !!',
@@ -43,7 +43,7 @@ class JenjangController extends Controller
 
         $file = request()->icon;
         $filename = $file->getClientOriginalName();
-        $file->move(\public_path('icon'), $filename);
+        $file->move(public_path('icon'), $filename);
 
         $data = [
             'jenjang' => Request()->jenjang,
@@ -68,15 +68,35 @@ class JenjangController extends Controller
         request()->validate(
             [
                 'jenjang' => 'required',
+                'icon' => 'max:1024',
             ],
             [
                 'jenjang.required' => 'Wajib diisi !!',
             ]
         );
-        $data = [
-            'jenjang' => Request()->jenjang,
-        ];
-        $this->JenjangModel->UpdateData($id_jenjang, $data);
+
+        if (Request()->icon <> "") {
+            //hapus icon lama
+            $jenjang = $this->JenjangModel->DetailData($id_jenjang);
+            if ($jenjang->icon <> "") {
+                unlink(public_path('icon') . '/' . $jenjang->icon);
+            }
+            //jika ingin ganti icon
+            $file = request()->icon;
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('icon'), $filename);
+            $data = [
+                'jenjang' => Request()->jenjang,
+                'icon' => $filename,
+            ];
+            $this->JenjangModel->UpdateData($id_jenjang, $data);
+        } //jika tidak ganti icon
+        else {
+            $data = [
+                'jenjang' => Request()->jenjang,
+            ];
+            $this->JenjangModel->UpdateData($id_jenjang, $data);
+        }
         return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Update');
     }
 

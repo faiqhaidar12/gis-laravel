@@ -10,7 +10,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/jenjang/update/{{ $jenjang->id_jenjang }}" method="POST">
+                <form action="/jenjang/update/{{ $jenjang->id_jenjang }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Icon</label>
+                                <label>Ganti Icon</label>
                                 <input type="file" name="icon" class="form-control" placeholder="icon" accept="image/png">
                                 <div class="text-danger">
                                     @error('icon')
@@ -37,12 +37,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Icon</label>
+                                <img src="{{ asset('icon') }}/{{ $jenjang->icon }}" width="100px">
+                            </div>
+                        </div>
                     </div>
 
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary"><i class=" fa fa-save"></i> Simpan</button>
-                <button type="submit" class="btn btn-warning float-right"></i> Cancel</button>
+                <a href="/jenjang" class="btn btn-warning float-right"></i> Cancel</a>
             </div>
             </form>
         </div>

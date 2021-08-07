@@ -15,4 +15,11 @@ class SekolahModel extends Model
             ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
             ->get();
     }
+
+    //untuk menambah data sekolah
+    public function InsertData($data)
+    {
+        DB::table('tbl_sekolah')
+            ->insert($data);
+    }
 }
