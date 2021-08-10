@@ -6,6 +6,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,9 @@ Route::get('/jenjang/delete/{id_jenjang}', [JenjangController::class, 'delete'])
 Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah');
 Route::get('/sekolah/add', [SekolahController::class, 'add']);
 Route::post('/sekolah/insert', [SekolahController::class, 'insert']);
+Route::get('/sekolah/edit/{id_sekolah}', [SekolahController::class, 'edit']);
+Route::post('/sekolah/update/{id_sekolah}', [SekolahController::class, 'update']);
+Route::get('/sekolah/delete/{id_sekolah}', [SekolahController::class, 'delete']);
+
+//User
+Route::get('/user', [UserController::class, 'index'])->name('user');

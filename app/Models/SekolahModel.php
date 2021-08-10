@@ -22,4 +22,27 @@ class SekolahModel extends Model
         DB::table('tbl_sekolah')
             ->insert($data);
     }
+
+    //untuk menampilkan detaildata di form edit
+    public function DetailData($id_sekolah)
+    {
+        return DB::table('tbl_sekolah')
+            ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
+            ->where('id_sekolah', $id_sekolah)->first();
+    }
+    //untuk edit data
+    public function UpdateData($id_sekolah, $data)
+    {
+        DB::table('tbl_sekolah')
+            ->where('id_sekolah', $id_sekolah)
+            ->update($data);
+    }
+    //untuk hapus atau delete data
+    public function DeleteData($id_sekolah)
+    {
+        DB::table('tbl_sekolah')
+            ->where('id_sekolah', $id_sekolah)
+            ->delete();
+    }
 }

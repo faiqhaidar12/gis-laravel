@@ -8,7 +8,7 @@
                 <h3 class="card-title">Data {{ $title }}</h3>
 
                 <div class="card-tools">
-                    <a href="/sekolah/add" button type="button" class="btn btn-primary btn-sm btn-flat">Add <i
+                    <a href="/user/add" button type="button" class="btn btn-primary btn-sm btn-flat">Add <i
                             class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -25,32 +25,29 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th width="50px" class="text-center">No</th>
-                            <th class="text-center">Nama Sekolah</th>
-                            <th class="text-center" width="50px">Jenjang</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Kecamatan</th>
+                            <th width="60px">No</th>
+                            <th>Nama User</th>
+                            <th width="50px" class="text-center">Email</th>
+                            <th class="text-center">Password</th>
                             <th class="text-center">Foto</th>
                             <th width="100px" class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1; ?>
-                        @foreach ($sekolah as $data)
+                        @foreach ($user as $data)
                             <tr>
-                                <td class="text-center"> {{ $no++ }}</td>
-                                <td>{{ $data->nama_sekolah }}</td>
-                                <td class="text-center">{{ $data->jenjang }}</td>
-                                <td class="text-center">{{ $data->status }}</td>
-                                <td class="text-center">{{ $data->kecamatan }}</td>
+                                <td> {{ $no++ }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->password }}</td>
                                 <td class="text-center"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="100px">
                                 </td>
                                 <td class="text-center">
-                                    <a href="/sekolah/edit/{{ $data->id_sekolah }}"
-                                        class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="/user/edit/{{ $data->id }}" class="btn btn-sm btn-flat btn-warning"><i
+                                            class="fa fa-edit"></i></a>
                                     <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal"
-                                        data-target="#delete{{ $data->id_sekolah }}"><i
-                                            class="fa fa-trash-alt"></i></button>
+                                        data-target="#delete{{ $data->id }}"><i class="fa fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -62,12 +59,12 @@
         <!-- /.card -->
     </div>
 
-    @foreach ($sekolah as $data)
-        <div class="modal fade" id="delete{{ $data->id_sekolah }}">
+    @foreach ($user as $data)
+        <div class="modal fade" id="delete{{ $data->id }}">
             <div class="modal-dialog">
                 <div class="modal-content bg-danger">
                     <div class="modal-header">
-                        <h4 class="modal-title">{{ $data->nama_sekolah }}</h4>
+                        <h4 class="modal-title">{{ $data->email }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,7 +74,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                        <a href="/sekolah/delete/{{ $data->id_sekolah }}" button type="button"
+                        <a href="/user/delete/{{ $data->id }}" button type="button"
                             class="btn btn-outline-light">Delete</a>
                     </div>
                 </div>
