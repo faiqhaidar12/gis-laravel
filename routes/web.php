@@ -51,3 +51,12 @@ Route::get('/sekolah/delete/{id_sekolah}', [SekolahController::class, 'delete'])
 
 //User
 Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/user/add', [UserController::class, 'add']);
+Route::post('/user/insert', [UserController::class, 'insert']);
+Route::get('/user/edit/{id}', [UserController::class, 'edit']);
+Route::post('/user/update/{id}', [UserController::class, 'update']);
+Route::get('/user/delete/{id_}', [UserController::class, 'delete']);
+
+//frontend
+
+Route::get('/kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);

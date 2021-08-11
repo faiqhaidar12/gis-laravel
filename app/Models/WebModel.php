@@ -13,4 +13,25 @@ class WebModel extends Model
         return DB::table('tbl_kecamatan')
             ->get();
     }
+
+    public function DataJenjang()
+    {
+        return DB::table('tbl_jenjang')
+            ->get();
+    }
+
+    public function Detailkecamatan($id_kecamatan)
+    {
+        return DB::table('tbl_kecamatan')
+            ->where('id_kecamatan', $id_kecamatan)->first();
+    }
+
+    public function DataSekolah($id_kecamatan)
+    {
+        return DB::table('tbl_sekolah')
+            ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
+            ->where('tbl_sekolah.id_kecamatan', $id_kecamatan)
+            ->get();
+    }
 }
