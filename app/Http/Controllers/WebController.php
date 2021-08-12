@@ -19,6 +19,7 @@ class WebController extends Controller
         $data = [
             'title' => 'Pemetaan',
             'kecamatan' => $this->WebModel->DataKecamatan(),
+            'sekolah' => $this->WebModel->AllDataSekolah(),
             'jenjang' => $this->WebModel->DataJenjang(),
 
         ];

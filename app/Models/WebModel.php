@@ -34,4 +34,12 @@ class WebModel extends Model
             ->where('tbl_sekolah.id_kecamatan', $id_kecamatan)
             ->get();
     }
+
+    public function AllDataSekolah()
+    {
+        return DB::table('tbl_sekolah')
+            ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
+            ->get();
+    }
 }

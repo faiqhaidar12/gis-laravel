@@ -35,6 +35,7 @@
         @foreach ($kecamatan as $data)
             var data{{ $data->id_kecamatan }} = L.layerGroup();
         @endforeach
+        var sekolah = L.layerGroup();
 
         var map = L.map('map', {
             center: [-7.8042526272894435, 110.36456246089777],
@@ -43,6 +44,7 @@
                 @foreach ($kecamatan as $data)
                     data{{ $data->id_kecamatan }},
                 @endforeach
+                sekolah,
             ]
         });
 
@@ -57,6 +59,7 @@
             @foreach ($kecamatan as $data)
                 "{{ $data->kecamatan }}": data{{ $data->id_kecamatan }},
             @endforeach
+            "sekolah": sekolah,
         };
 
         L.control.layers(baseMaps, overlayer).addTo(map);
@@ -69,6 +72,18 @@
             fillOpacity : 1.0,
             },
             }).addTo(data{{ $data->id_kecamatan }});
+        @endforeach
+
+        @foreach ($sekolah as $data)
+            var iconsekolah = L.icon({
+            iconUrl: '{{ asset('icon') }}/{{ $data->icon }}',
+        
+            iconSize: [40, 40], // size of the icon
+            });
+        
+            var informasi ='<div class="tg-wrap"><table class="table table-bordered" ><tr><td colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="200px"></td></tr><tbody><tr><td>Nama Sekolah</td><td>{{ $data->nama_sekolah }}</td></tr><tr><td>Jenjang</td><td>{{ $data->jenjang }}</td></tr><tr><td>Status</td><td>{{ $data->status }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailsekolah/{{$data->id_sekolah}}" class="btn btn-default">Detail</td></tr></tbody></table></div>';
+        
+            L.marker([<?= $data->posisi ?>],{icon:iconsekolah}).addTo(sekolah).bindPopup(informasi);
         @endforeach
     </script>
 @endsection
