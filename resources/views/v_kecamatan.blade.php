@@ -65,12 +65,22 @@
             });
 
 
+        
+
+        @foreach ($jenjang as $data)
+            var jenjang{{$data->id_jenjang}} =L.layerGroup();
+        @endforeach
+        
         var data{{ $kec->id_kecamatan }} = L.layerGroup();
 
         var map = L.map('map', {
             center: [-7.8042526272894435, 110.36456246089777],
             zoom: 12,
-            layers: [peta2, data{{ $kec->id_kecamatan }}, ]
+            layers: [peta2, data{{ $kec->id_kecamatan }}, 
+            @foreach ($jenjang as $data)
+            jenjang{{$data->id_jenjang}},
+            @endforeach
+        ]
         });
 
         var baseMaps = {
@@ -82,6 +92,9 @@
 
         var overlayer = {
             "{{ $kec->kecamatan }}": data{{ $kec->id_kecamatan }},
+            @foreach ($jenjang as $data)
+            "{{ $data->jenjang }}": jenjang{{ $data->id_jenjang }},
+            @endforeach
         };
 
         L.control.layers(baseMaps, overlayer).addTo(map);
@@ -95,6 +108,19 @@
         }).addTo(data{{ $kec->id_kecamatan }});
 
         map.fitBounds(kec.getBounds());
+
+        @foreach ($sekolah as $data)
+            var iconsekolah = L.icon({
+            iconUrl: '{{ asset('icon') }}/{{ $data->icon }}',
+        
+            iconSize: [40, 40], // size of the icon
+            });
+        
+            var informasi ='<div class="tg-wrap"><table class="table table-bordered" ><tr><td colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="200px"></td></tr><tbody><tr><td>Nama Sekolah</td><td>{{ $data->nama_sekolah }}</td></tr><tr><td>Jenjang</td><td>{{ $data->jenjang }}</td></tr><tr><td>Status</td><td>{{ $data->status }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailsekolah/{{$data->id_sekolah}}" class="btn btn-default">Detail</td></tr></tbody></table></div>';
+        
+            L.marker([<?= $data->posisi ?>],{icon:iconsekolah}).addTo(jenjang{{ $data->id_jenjang }}).bindPopup(informasi);
+        @endforeach
+        
     </script>
 
     <script>

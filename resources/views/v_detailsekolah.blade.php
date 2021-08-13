@@ -1,7 +1,43 @@
 @extends('layouts.frontend')
-@section('content')
 
-    <div id="map" style="width: 100%; height: 550px;"></div>
+@section('content')
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="map" style="width: 100%; height: 550px;"></div>
+        </div>
+
+        <div class="col-sm-6">
+            <img src="{{ asset('foto') }}/{{ $sekolah->foto }}" width="100%" height="550px">
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <br>
+        <br>
+        <table class="table table-bordered">
+            <tr>
+                <td width="170px">Nama Sekolah</td>
+                <td width="50px">:</td>
+                <td>{{ $sekolah->nama_sekolah }}</td>
+            </tr>
+            <tr>
+                <td>Jenjang</td>
+                <td>:</td>
+                <td>{{ $sekolah->jenjang }}</td>
+            </tr>
+            <tr>
+                <td>Kecamatan</td>
+                <td>:</td>
+                <td>{{ $sekolah->kecamatan }}</td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td>{{ $sekolah->alamat }}</td>
+            </tr>
+        </table>
+    </div>
+
     <script>
         var peta1 = L.tileLayer(
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -32,22 +68,11 @@
                 id: 'mapbox/dark-v10'
             });
 
-        @foreach ($kecamatan as $data)
-            var data{{ $data->id_kecamatan }} = L.layerGroup();
-        @endforeach
-        var sekolah = L.layerGroup();
-
         var map = L.map('map', {
-            center: [-7.8042526272894435, 110.36456246089777],
-            zoom: 12,
-            layers: [peta2,
-                @foreach ($kecamatan as $data)
-                    data{{ $data->id_kecamatan }},
-                @endforeach
-                sekolah,
-            ]
+            center: [{{ $sekolah->posisi }}],
+            zoom: 15,
+            layers: [peta2],
         });
-
         var baseMaps = {
             "Grayscale": peta1,
             "Satellite": peta2,
@@ -55,35 +80,15 @@
             "Dark": peta4,
         };
 
-        var overlayer = {
-            @foreach ($kecamatan as $data)
-                "{{ $data->kecamatan }}": data{{ $data->id_kecamatan }},
-            @endforeach
-            "sekolah": sekolah,
-        };
+        L.control.layers(baseMaps).addTo(map);
 
-        L.control.layers(baseMaps, overlayer).addTo(map);
+        var iconsekolah = L.icon({
+            iconUrl: '{{ asset('icon') }}/{{ $sekolah->icon }}',
 
-        @foreach ($kecamatan as $data)
-            L.geoJSON(<?= $data->geojson ?>,{
-            style : {
-            color : 'white',
-            fillColor: '{{ $data->warna }}',
-            fillOpacity : 1.0,
-            },
-            }).addTo(data{{ $data->id_kecamatan }});
-        @endforeach
-
-        @foreach ($sekolah as $data)
-            var iconsekolah = L.icon({
-            iconUrl: '{{ asset('icon') }}/{{ $data->icon }}',
-        
             iconSize: [40, 40], // size of the icon
-            });
-        
-            var informasi ='<div class="tg-wrap"><table class="table table-bordered" ><tr><td colspan="2"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="200px"></td></tr><tbody><tr><td>Nama Sekolah</td><td>{{ $data->nama_sekolah }}</td></tr><tr><td>Jenjang</td><td>{{ $data->jenjang }}</td></tr><tr><td>Status</td><td>{{ $data->status }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailsekolah/{{$data->id_sekolah}}" class="btn btn-default">Detail</td></tr></tbody></table></div>';
-        
-            L.marker([<?= $data->posisi ?>],{icon:iconsekolah}).addTo(sekolah).bindPopup(informasi);
-        @endforeach
+        });
+        L.marker([<?= $sekolah->posisi ?>], {
+            icon: iconsekolah
+        }).addTo(map);
     </script>
 @endsection

@@ -20,6 +20,21 @@ class WebModel extends Model
             ->get();
     }
 
+    public function DataSekolahJenjang($id_jenjang)
+    {
+        return DB::table('tbl_sekolah')
+            ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
+            ->where('tbl_sekolah.id_jenjang', $id_jenjang)
+            ->get();
+    }
+
+    public function DetailJenjang($id_jenjang)
+    {
+        return DB::table('tbl_jenjang')
+            ->where('id_jenjang', $id_jenjang)->first();
+    }
+
     public function Detailkecamatan($id_kecamatan)
     {
         return DB::table('tbl_kecamatan')
@@ -41,5 +56,14 @@ class WebModel extends Model
             ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
             ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
             ->get();
+    }
+
+    public function DetailDataSekolah($id_sekolah)
+    {
+        return DB::table('tbl_sekolah')
+            ->join('tbl_jenjang', 'tbl_jenjang.id_jenjang', '=', 'tbl_sekolah.id_jenjang')
+            ->join('tbl_kecamatan', 'tbl_kecamatan.id_kecamatan', '=', 'tbl_sekolah.id_kecamatan')
+            ->where('id_sekolah', $id_sekolah)
+            ->first();
     }
 }

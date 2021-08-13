@@ -58,5 +58,6 @@ Route::post('/user/update/{id}', [UserController::class, 'update']);
 Route::get('/user/delete/{id_}', [UserController::class, 'delete']);
 
 //frontend
-
 Route::get('/kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);
+Route::get('/jenjang/{id_jenjang}', [WebController::class, 'jenjang']);
+Route::get('/detailsekolah/{id_sekolah}', [WebController::class, 'detailsekolah']);

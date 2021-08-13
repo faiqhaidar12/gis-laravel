@@ -38,4 +38,28 @@ class WebController extends Controller
         ];
         return view('v_kecamatan', $data);
     }
+
+    public function jenjang($id_jenjang)
+    {
+        $jen = $this->WebModel->Detailjenjang($id_jenjang);
+        $data = [
+            'title' => 'jenjang ' . $jen->jenjang,
+            'kecamatan' => $this->WebModel->DataKecamatan(),
+            'sekolah' => $this->WebModel->DataSekolahJenjang($id_jenjang),
+            'jenjang' => $this->WebModel->DataJenjang(),
+        ];
+        return view('v_jenjang', $data);
+    }
+
+    public function detailsekolah($id_sekolah)
+    {
+        $sekolah = $this->WebModel->DetailDataSekolah($id_sekolah);
+        $data = [
+            'title' => 'Detail ' . $sekolah->nama_sekolah,
+            'kecamatan' => $this->WebModel->DataKecamatan(),
+            'jenjang' => $this->WebModel->DataJenjang(),
+            'sekolah' => $sekolah,
+        ];
+        return view('v_detailsekolah', $data);
+    }
 }
