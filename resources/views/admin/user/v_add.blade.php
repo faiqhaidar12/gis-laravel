@@ -42,7 +42,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Password</label>
-                                <input name="password" class="form-control" value="{{ old('password') }}"
+                                <input name="password" type="password" class="form-control" value="{{ old('password') }}"
                                     placeholder="pasword user">
                                 <div class="text-danger">
                                     @error('password')

@@ -78,7 +78,7 @@ class SekolahController extends Controller
 
         ];
         $this->SekolahModel->InsertData($data);
-        return redirect()->route('sekolah')->with('pesan', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('sekolah')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
     public function edit($id_sekolah)
@@ -152,13 +152,13 @@ class SekolahController extends Controller
             ];
             $this->SekolahModel->UpdateData($id_sekolah, $data);
         }
-        return redirect()->route('sekolah')->with('pesan', 'Data Berhasil Di Update');
+        return redirect()->route('sekolah')->with('success', 'Data Berhasil Di Update');
     }
 
     //untuk hapus atau delete
     public function delete($id_sekolah)
     {
         $this->SekolahModel->DeleteData($id_sekolah);
-        return redirect()->route('sekolah')->with('pesan', 'Data Berhasil Di Delete');
+        return redirect()->route('sekolah')->with('success', 'Data Berhasil Di Delete');
     }
 }

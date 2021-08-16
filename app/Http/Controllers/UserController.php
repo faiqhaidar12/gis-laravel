@@ -61,7 +61,7 @@ class UserController extends Controller
             'foto' => $filename,
         ];
         $this->UserModel->InsertData($data);
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Simpan!!');
+        return redirect()->route('user')->with('success', 'Data Berhasil Di Simpan!!');
     }
 
     //untuk detail edit data
@@ -113,13 +113,13 @@ class UserController extends Controller
             ];
             $this->UserModel->UpdateData($id, $data);
         }
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Update');
+        return redirect()->route('user')->with('info', 'Data Berhasil Di Update');
     }
 
     //untuk hapus atau delete
     public function delete($id)
     {
         $this->UserModel->DeleteData($id);
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Delete');
+        return redirect()->route('user')->with('warning', 'Data Berhasil Di Delete');
     }
 }

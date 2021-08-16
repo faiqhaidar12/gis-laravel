@@ -50,7 +50,7 @@ class JenjangController extends Controller
             'icon' => $filename,
         ];
         $this->JenjangModel->InsertData($data);
-        return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Simpan!!');
+        return redirect()->route('jenjang')->with('success', 'Data Berhasil di Tambah!');
     }
     //untuk detail edit data
     public function edit($id_jenjang)
@@ -97,13 +97,13 @@ class JenjangController extends Controller
             ];
             $this->JenjangModel->UpdateData($id_jenjang, $data);
         }
-        return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Update');
+        return redirect()->route('jenjang')->with('info', 'Data Berhasil Di Update');
     }
 
     //untuk hapus atau delete
     public function delete($id_jenjang)
     {
         $this->JenjangModel->DeleteData($id_jenjang);
-        return redirect()->route('jenjang')->with('pesan', 'Data Berhasil Di Delete');
+        return redirect()->route('jenjang')->with('warning', 'Data Berhasil Di Delete');
     }
 }
